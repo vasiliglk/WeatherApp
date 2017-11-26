@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5d50f7c7-9aba-45fb-9e16-404a9ce6afaa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://vasiliglk-001-site1.dtempurl.com/Service.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="693a14c3-a74d-47e0-b691-0a5772dc562e" SourceId="1" SourceUrl="http://vasiliglk-001-site1.dtempurl.com/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="WeatherService.wsdl" MetadataType="Wsdl" ID="5a2116f0-fc57-42d8-a24e-d5fc0727af6d" SourceId="1" SourceUrl="http://vasiliglk-001-site1.dtempurl.com/Service.svc?wsdl" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="acf81b21-618c-4779-a68a-b4b6cc43a6dd" SourceId="1" SourceUrl="http://vasiliglk-001-site1.dtempurl.com/Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service.disco" MetadataType="Disco" ID="5aad9091-4408-420f-820e-089c06ac6c48" SourceId="1" SourceUrl="http://vasiliglk-001-site1.dtempurl.com/Service.svc?disco" />
+    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="84c24796-c239-42b3-a1df-7f2f44da1872" SourceId="1" SourceUrl="http://vasiliglk-001-site1.dtempurl.com/Service.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
