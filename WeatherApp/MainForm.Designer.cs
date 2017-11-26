@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.headPanel = new System.Windows.Forms.Panel();
+            this.cmbCities = new System.Windows.Forms.ComboBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.curTemp = new System.Windows.Forms.Label();
             this.curMetcast = new System.Windows.Forms.Label();
-            this.curCity = new System.Windows.Forms.Label();
             this.picMain = new System.Windows.Forms.PictureBox();
             this.label20 = new System.Windows.Forms.Label();
             this.curDayHum = new System.Windows.Forms.Label();
@@ -61,7 +61,6 @@
             this.dayPic2 = new System.Windows.Forms.PictureBox();
             this.dayDate2 = new System.Windows.Forms.Label();
             this.dayTemp2 = new System.Windows.Forms.Label();
-            this.cmbCities = new System.Windows.Forms.ComboBox();
             this.headPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMain)).BeginInit();
             this.dayPanel1.SuspendLayout();
@@ -83,8 +82,25 @@
             this.headPanel.Size = new System.Drawing.Size(443, 48);
             this.headPanel.TabIndex = 0;
             // 
+            // cmbCities
+            // 
+            this.cmbCities.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(44)))), ((int)(((byte)(55)))));
+            this.cmbCities.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbCities.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbCities.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmbCities.ForeColor = System.Drawing.Color.White;
+            this.cmbCities.FormattingEnabled = true;
+            this.cmbCities.Location = new System.Drawing.Point(12, 12);
+            this.cmbCities.Name = "cmbCities";
+            this.cmbCities.Size = new System.Drawing.Size(156, 26);
+            this.cmbCities.Sorted = true;
+            this.cmbCities.TabIndex = 4;
+            this.cmbCities.Text = "Минск";
+            this.cmbCities.SelectedValueChanged += new System.EventHandler(this.cmbCities_SelectedValueChanged);
+            // 
             // btnRefresh
             // 
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefresh.FlatAppearance.BorderSize = 0;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe MDL2 Assets", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -100,6 +116,7 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe MDL2 Assets", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,7 +138,7 @@
             this.curTemp.BackColor = System.Drawing.Color.Transparent;
             this.curTemp.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.curTemp.ForeColor = System.Drawing.Color.White;
-            this.curTemp.Location = new System.Drawing.Point(107, 57);
+            this.curTemp.Location = new System.Drawing.Point(102, 57);
             this.curTemp.Name = "curTemp";
             this.curTemp.Size = new System.Drawing.Size(0, 86);
             this.curTemp.TabIndex = 1;
@@ -131,30 +148,15 @@
             this.curMetcast.AutoSize = true;
             this.curMetcast.BackColor = System.Drawing.Color.Transparent;
             this.curMetcast.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.curMetcast.ForeColor = System.Drawing.Color.White;
-            this.curMetcast.Location = new System.Drawing.Point(133, 156);
+            this.curMetcast.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.curMetcast.Location = new System.Drawing.Point(134, 152);
             this.curMetcast.Name = "curMetcast";
             this.curMetcast.Size = new System.Drawing.Size(0, 21);
             this.curMetcast.TabIndex = 1;
             this.curMetcast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // curCity
-            // 
-            this.curCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.curCity.AutoSize = true;
-            this.curCity.BackColor = System.Drawing.Color.Transparent;
-            this.curCity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.curCity.ForeColor = System.Drawing.Color.White;
-            this.curCity.Location = new System.Drawing.Point(188, 221);
-            this.curCity.Name = "curCity";
-            this.curCity.Size = new System.Drawing.Size(0, 21);
-            this.curCity.TabIndex = 1;
-            this.curCity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // picMain
             // 
-            this.picMain.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMain.BackgroundImage")));
             this.picMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picMain.Location = new System.Drawing.Point(0, 57);
             this.picMain.Name = "picMain";
@@ -337,7 +339,7 @@
             this.dayDate1.AutoSize = true;
             this.dayDate1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dayDate1.ForeColor = System.Drawing.Color.White;
-            this.dayDate1.Location = new System.Drawing.Point(7, 119);
+            this.dayDate1.Location = new System.Drawing.Point(20, 119);
             this.dayDate1.Name = "dayDate1";
             this.dayDate1.Size = new System.Drawing.Size(0, 21);
             this.dayDate1.TabIndex = 1;
@@ -440,17 +442,6 @@
             this.dayTemp2.TabIndex = 1;
             this.dayTemp2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cmbCities
-            // 
-            this.cmbCities.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(44)))), ((int)(((byte)(55)))));
-            this.cmbCities.ForeColor = System.Drawing.Color.White;
-            this.cmbCities.FormattingEnabled = true;
-            this.cmbCities.Location = new System.Drawing.Point(12, 12);
-            this.cmbCities.Name = "cmbCities";
-            this.cmbCities.Size = new System.Drawing.Size(156, 21);
-            this.cmbCities.TabIndex = 4;
-            this.cmbCities.SelectedValueChanged += new System.EventHandler(this.cmbCities_SelectedValueChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -473,7 +464,6 @@
             this.Controls.Add(this.dayPanel1);
             this.Controls.Add(this.dayPanel3);
             this.Controls.Add(this.dayPanel2);
-            this.Controls.Add(this.curCity);
             this.Controls.Add(this.curMetcast);
             this.Controls.Add(this.curTemp);
             this.Controls.Add(this.headPanel);
@@ -508,7 +498,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label curTemp;
         private System.Windows.Forms.Label curMetcast;
-        private System.Windows.Forms.Label curCity;
         private System.Windows.Forms.PictureBox picMain;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label curDayHum;

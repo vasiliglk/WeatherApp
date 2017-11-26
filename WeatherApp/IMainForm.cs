@@ -17,7 +17,7 @@ namespace WeatherApp
         void SetDayPanels(int countPanels, List<DayMeteoInfo> days);
         void SetDayPanel(int numPanel, string metcast, string temp, string date);
         void SetCities(Cities[] cities);
-        string GetCity();
+        string GetCityUrl();
         event EventHandler RefreshDataClick;
     }
 }

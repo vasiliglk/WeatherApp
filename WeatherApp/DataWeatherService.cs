@@ -28,7 +28,7 @@ namespace WeatherApp
                 //в случае отказа сервера в получении текущей даты
                 if (this._meteo.CurrentDay==null)
                 {
-                    this._meteo.CurrentDay = this._meteo.Days.FirstOrDefault(day => day.Day.Contains(DateTime.Now.ToString("dd MMMM")));
+                    this._meteo.CurrentDay = this._meteo.Days.FirstOrDefault(day => day.Day.Contains(DateTime.Now.ToString("dd MMMM")))?? this._meteo.Days.FirstOrDefault(day => day.Day.Contains(DateTime.Now.AddDays(1).ToString("dd MMMM")));
                 }
             }
         }

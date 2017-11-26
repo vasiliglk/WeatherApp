@@ -16,7 +16,7 @@ namespace WeatherApp
 
         private void ViewOnRefreshDataClick(object sender, EventArgs eventArgs)
         {
-            _data.GetDataFromService(_view.GetCity(),false);
+            _data.GetDataFromService(_view.GetCityUrl(),false);
             _view.SetCities(_data.GetCities());
             _view.SetCurrrentCity(_data.GetCity());
             _view.SetHumidityForCurrrentDay(_data.GetHumidityForCurrrentDay());

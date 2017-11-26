@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeatherApp.ServiceReference1;
 
@@ -10,6 +12,7 @@ namespace WeatherApp
 {
     public partial class MainForm : Form, IMainForm
     {
+
         #region Extern
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -37,10 +40,10 @@ namespace WeatherApp
         public MainForm()
         {
             InitializeComponent();
-            InitLabelControl(curTemp, curMetcast, curCity);
+            InitLabelControl(curTemp, curMetcast);
             AddDrag(headPanel);
         }
-        
+
         #region Form
         private void InitLabelControl(params Label[] labels)
         {
@@ -67,7 +70,6 @@ namespace WeatherApp
         }
         private void cmbCities_SelectedValueChanged(object sender, EventArgs e)
         {
-            SetCurrrentCity((cmbCities?.SelectedItem as Cities)?.Name);
             RefreshDataClick?.Invoke(this, EventArgs.Empty);
         }
         #endregion
@@ -87,13 +89,13 @@ namespace WeatherApp
                 image = Image.FromFile(FilePath("cloudy.png"));
                 mainImage = "sun.jpg";
             }
-            if (metcast.Contains("Сплошная облачность\r\nБез осадков")|| metcast.Contains("Сплошная облачность\r\nБез осадков\r\nТуман\r\nВидимость 50-100 м\r\n"))
+            if (metcast.Contains("Сплошная облачность\r\nБез осадков") || metcast.Contains("Сплошная облачность\r\nБез осадков\r\nТуман\r\nВидимость 50-100 м\r\n"))
             {
                 image = Image.FromFile(FilePath("cloud.png"));
                 mainImage = "cloud.jpg";
             }
             if (metcast.Contains("Сплошная облачность\r\nНебольшой дождь") ||
-                metcast.Contains("Сплошная облачность\r\nВозможен дождь\r\n") || metcast.Contains("Сплошная облачность\r\nМокрый снег\r\n")|| metcast.Contains("Сплошная облачность\r\nСильный мокрый снег\r\n")|| metcast.Contains("Сплошная облачность\r\nДождь\r\n"))
+                metcast.Contains("Сплошная облачность\r\nВозможен дождь\r\n") || metcast.Contains("Сплошная облачность\r\nМокрый снег\r\n") || metcast.Contains("Сплошная облачность\r\nСильный мокрый снег\r\n") || metcast.Contains("Сплошная облачность\r\nДождь\r\n"))
             {
                 image = Image.FromFile(FilePath("rain-cloud.png"));
                 mainImage = "cloud.jpg";
@@ -123,6 +125,7 @@ namespace WeatherApp
         {
             return Path.Combine(Path.Combine(Environment.CurrentDirectory, "Images"), fileName);
         }
+
         #endregion
 
         #region Interface
@@ -155,7 +158,7 @@ namespace WeatherApp
         }
         public void SetCurrrentCity(string city)
         {
-            this.curCity.Text = city;
+
         }
         public void SetDayPanels(List<DayMeteoInfo> days)
         {
@@ -166,6 +169,7 @@ namespace WeatherApp
             var numPanel = 1;
             foreach (var day in days.Take(countPanels))
             {
+
                 SetDayPanel(numPanel++, day.Metcast, day.Temperature, day.Day);
             }
         }
@@ -173,39 +177,47 @@ namespace WeatherApp
         {
             var namePanel = $"dayPanel{numPanel}";
             var panel = this.Controls.Find(namePanel, true).FirstOrDefault();
-            var dayPic = panel.Controls.Find($"dayPic{numPanel}", false).FirstOrDefault() as PictureBox;
-            var dayTemp = panel.Controls.Find($"dayTemp{numPanel}", false).FirstOrDefault() as Label;
-            var dayDate = panel.Controls.Find($"dayDate{numPanel}", false).FirstOrDefault() as Label;
+            if (panel != null)
+            {
+                if (date.Contains(DateTime.Now.ToString("dd MMMM")))
+                {
+                    panel.BackColor = Color.FromArgb(67, 199, 238);
+                }
 
-            if (dayPic != null)
-            {
-                dayPic.BackgroundImage = GetImage(metcast);
-            }
-            if (dayTemp != null)
-            {
-                dayTemp.Text = temp;
-            }
-            if (dayDate != null)
-            {
-                dayDate.Text = date;
+                var dayPic = panel.Controls.Find($"dayPic{numPanel}", false).FirstOrDefault() as PictureBox;
+                var dayTemp = panel.Controls.Find($"dayTemp{numPanel}", false).FirstOrDefault() as Label;
+                var dayDate = panel.Controls.Find($"dayDate{numPanel}", false).FirstOrDefault() as Label;
+
+                if (dayPic != null)
+                {
+                    dayPic.BackgroundImage = GetImage(metcast);
+                }
+                if (dayTemp != null)
+                {
+                    dayTemp.Text = temp;
+                }
+                if (dayDate != null)
+                {
+                    dayDate.Text = date;
+                }
             }
         }
         public void SetCities(Cities[] cities)
         {
-            cmbCities.Items.AddRange(cities);
-            cmbCities.DisplayMember = "Name";
+            if (cmbCities.Items.Count <= 0)
+            {
+                cmbCities.Items.Clear();
+                cmbCities.Items.AddRange(cities);
+                cmbCities.DisplayMember = "Name";
+            }
+            cmbCities.Select(0, 0);
         }
-        public string GetCity()
+        public string GetCityUrl()
         {
-            var city = (cmbCities.SelectedItem as Cities)??new Cities() {Name = "Минск", Url = ""};
-            return city.Url??"";
+            var city = (cmbCities.SelectedItem as Cities) ?? new Cities() { Name = "Минск", Url = "" };
+            return city.Url ?? "";
         }
-
         public event EventHandler RefreshDataClick;
-
-
         #endregion
-
-
     }
 }
